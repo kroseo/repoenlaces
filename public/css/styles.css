@@ -48,12 +48,20 @@
 
 header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header>img {
     width: 120px;
 }
 
-.main_admin {
-
+header>h1 {
+    font-size: xx-large;
+    color: rgb(230, 130, 0);
 }
+
+.main_admin {
+    margin: 10%;
+}
+

@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title', 'ADMINISTRADOR')
+
 @section('main')
-Sitio administrador
+<main class="main_admin">
+    Sitio administrador
+</main>
 @endsection
