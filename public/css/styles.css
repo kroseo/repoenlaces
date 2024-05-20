@@ -8,6 +8,7 @@
 }
 
 .login_form {
+    max-height: 100vh;
     max-width: 100%;
     padding-left: 15%;
     padding-right: 15%;
@@ -43,4 +44,16 @@
 
 .center {
     text-align: center;
+}
+
+header {
+    display: flex;
+}
+
+header>img {
+    width: 120px;
+}
+
+.main_admin {
+
 }

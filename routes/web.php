@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
@@ -18,6 +19,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+//Rutas tras el login de usuario
+Route::post('/user',[LoginController::class, 'index']);
 
 // Rutas para registro de usuarios
 Route::get('/newuser', [RegisterController::class, 'create'])->name('newuser');

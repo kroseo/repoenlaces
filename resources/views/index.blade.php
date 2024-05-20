@@ -10,7 +10,8 @@
 <body>
     <main>
         <div class="logo_container">
-            <form class="login_form" action="{{ route('login.index') }}">
+            <form class="login_form" action="{{ url('/user') }}" method="POST">
+            @csrf
                 <table>
                     <tr>
                         <td class="form_table">Usuario:</td>
