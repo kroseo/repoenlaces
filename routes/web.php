@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,4 +38,5 @@ Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
 Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
 
 // Rutas de gestión de proyectos
-Route::get('proyectos/{dep}', [ProjectController::class, 'index']);
+Route::get('/proyectos/{dep}', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/proyectos/busqueda', [ProjectController::class, 'searchByTitle'])->name('projects.title');
