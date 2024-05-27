@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('/');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -35,3 +35,6 @@ Route::get('/csv/export',[CsvController::class,'export'])->name('csv.export');
 // Rutas para que un usuario pueda reestablecer contraseña
 Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
 Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
+
+// Rutas de gestión de proyectos
+Route::get('proyectos/{dep}', [ProjectController::class, 'index']);

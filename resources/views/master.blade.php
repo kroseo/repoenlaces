@@ -12,7 +12,23 @@
     <header>
         <img src="{{ asset('img/logo_repositorio.jpg') }}" alt="">
         <h1>@yield('title')</h1>
-        <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Cerrar sesión</button>
+        <button type="button" onclick="location.href='/repoenlaces/public'"
+            class="
+            focus:outline-none
+            text-white
+            bg-yellow-400
+            hover:bg-yellow-500
+            focus:ring-4
+            focus:ring-yellow-300
+            font-medium rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            me-2
+            mb-2
+            dark:focus:ring-yellow-900">
+            Cerrar sesión
+        </button>
     </header>
     @yield('main')
 </body>
