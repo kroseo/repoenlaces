@@ -39,4 +39,7 @@ Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset
 
 // Rutas de gestión de proyectos
 Route::get('/proyectos/{dep}', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/proyectos/busqueda', [ProjectController::class, 'searchByTitle'])->name('projects.title');
+Route::get('/proyectos/{grado}', [ProjectController::class, 'searchByGrade'])->name('projects.grade');
+Route::get('/proyectos/{titulo}', [ProjectController::class, 'searchByTitle'])->name('projects.title');
+Route::get('/proyectos/{clave}', [ProjectController::class, 'searchByKeyWord'])->name('projects.keyword');
+

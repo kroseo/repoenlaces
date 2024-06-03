@@ -80,3 +80,33 @@ div.options {
     justify-content:space-between;
 }
 
+.remove-arrow {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+}
+
+  /* For IE10 */
+.remove-arrow::-ms-expand {
+    display: none;
+}
+
+.ph-white::placeholder {
+    color:white;
+}
+
+.ph-white::-webkit-input-placeholder {
+    color: white;
+}
+.ph-white::-moz-placeholder {
+    color: white;
+}
+.ph-white:-ms-input-placeholder {
+    color: white;
+}
+.ph-white:-moz-placeholder {
+    color: white;
+}

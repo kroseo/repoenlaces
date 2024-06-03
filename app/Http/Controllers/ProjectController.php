@@ -14,7 +14,15 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $user = User::findOrFail($request->id);
-        $projects = Project::where('departamento','=',$user->name)->get();
+        $projects = Project::where('departamento','=',$user->name)->orderBy('curso', 'desc')->get();
+        return view('user.index', compact('user', 'projects'));
+    }
+
+    public function searchByGrade(Request $request) {
+        $user = User::findOrFail($request->id);
+        $projects = Project::where('departamento','=',$user->name)
+            ->where('ciclo',$request->ciclo)
+            ->orderBy('curso', 'desc')->get();
         return view('user.index', compact('user', 'projects'));
     }
 
