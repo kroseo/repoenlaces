@@ -41,29 +41,24 @@
                 @endif
             </select>
             <input type="hidden" name="id" value="{{ $user->id }}"/>
-            <input type="submit" src="{{ asset('img/lupa.jpg') }}">
+            <button type="submit" class="icon-search pt-2" onclick="location.href=route('projects.grade', $user->id)">
+                <img src="{{ asset('img/lupa.png') }}" alt="Buscar">
+            </button>
         </form>
         <form method="GET" action="{{ route('projects.title', $user->id) }}">
-            <input type="search" placeholder="Por palabra en el título" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900 ph-white"/>
+            <input type="search" name="title" placeholder="Por palabra en el título" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900 ph-white"/>
             <input type="hidden" name="id" value="{{ $user->id }}"/>
-
-            <div class="grid place-content-center h-40 gap-4">
-                <div class="relative mt-2 rounded-md shadow-sm">
-                   <input type="search" class="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter your query">
-                   <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                      </svg>
-                   </div>
-                </div>
-            </div>
-
-
+            <button type="submit" class="icon-search pt-2" onclick="location.href=route('projects.title', $user->id)">
+                <img src="{{ asset('img/lupa.png') }}" alt="Buscar">
+            </button>
 
         </form>
         <form method="GET" action="{{ route('projects.keyword', $user->id) }}">
-            <input type="search" placeholder="Por palabra clave" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900 ph-white"/>
+            <input type="search" name="keyword" placeholder="Por palabra clave" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900 ph-white"/>
             <input type="hidden" name="id" value="{{ $user->id }}"/>
+            <button type="submit" class="icon-search pt-2" onclick="location.href=route('projects.keyword', $user->id)">
+                <img src="{{ asset('img/lupa.png') }}" alt="Buscar">
+            </button>
         </form>
     </div>
     @if(isset($projects))

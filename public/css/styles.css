@@ -36,6 +36,15 @@
     border-color: white;
 }
 
+.icon-search {
+    background: asset("img/lupa.png") no-repeat scroll 0 0 transparent;
+    height: 25px;
+    width: 25px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
 .forgotten_password {
     color: white;
     text-decoration: none;
