@@ -22,11 +22,15 @@ class LoginController extends Controller
                 return view('user.index', compact('user'));
             }
             else {
-                dd('Contraseña incorrecta');
+                //dd('Contraseña incorrecta');
+                return redirect()->route('/')
+                    ->with('message', 'Contraseña incorrecta');
             }
         }
         else {
-            dd('Usuario no encontrado');
+            //dd('Usuario no encontrado');
+            return redirect()->route('/')
+                ->with('message', 'Usuario no encontrado');
         }
     }
 }

@@ -41,9 +41,11 @@ class ProjectController extends Controller
         //dd($request->keyword);
         //dd($user->name);
         $projects = Project::where('departamento','=',$user->name)
-            ->where('clave1','LIKE','%'.$request->keyword.'%',
-                'OR','clave2','LIKE','%'.$request->keyword.'%',
-                'OR','clave3','LIKE','%'.$request->keyword.'%')
+            ->where(function ($query)  use ($request) {
+                $query->where('clave1','LIKE','%'.$request->keyword.'%')
+                    ->orWhere('clave2','LIKE','%'.$request->keyword.'%')
+                    ->orWhere('clave3','LIKE','%'.$request->keyword.'%');
+            })
             ->orderBy('curso', 'desc')->get();
         return view('user.index', compact('user', 'projects'));
     }

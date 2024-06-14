@@ -19,9 +19,19 @@
                     </tr>
                     <tr>
                         <td class="form_table">Contraseña:</td>
-                        <td class="form_table"><input type="password" name="password"></td>
+                        <td class="form_table">
+                            <input type="password" name="password">
+                            <div class="form_table_error">
+                                @if (session('message'))
+                                    {{ session('message') }}
+                                @endif
+                            </div>
+                        </td>
                     </tr>
-                    <tr><td></td><td></td></tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     <tr>
                         <td class="center" colspan="2"><input type="submit" value="Entrar" class="submit_button"></td>
                     </tr>
