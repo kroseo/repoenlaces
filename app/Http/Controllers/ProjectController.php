@@ -14,7 +14,8 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $user = User::findOrFail($request->id);
-        $projects = Project::where('departamento','=',$user->name)->orderBy('curso', 'desc')->get();
+        $projects = Project::where('departamento','=',$user->name)
+            ->orderBy('curso', 'desc')->get();
         return view('user.index', compact('user', 'projects'));
     }
 
@@ -53,9 +54,10 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user = User::findOrFail($request->id);
+        return view('user.newproject', compact('user'));
     }
 
     /**

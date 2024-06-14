@@ -24,22 +24,25 @@ require __DIR__.'/auth.php';
 //Rutas tras el login de usuario
 Route::post('/user',[LoginController::class, 'index']);
 
-// Rutas para registro de usuarios
-Route::get('/newuser', [RegisterController::class, 'create'])->name('newuser');
-Route::post('/newuser', [RegisterController::class, 'store']);
+// // Rutas para registro de usuarios
+// Route::get('/newuser', [RegisterController::class, 'create'])->name('newuser');
+// Route::post('/newuser', [RegisterController::class, 'store']);
 
-// Rutas para insertar usuarios desde CSV
-Route::get('/csv',[CsvController::class,'index'])->name('csv.index');
-Route::post('/csv/import',[CsvController::class,'import'])->name('csv.import');
-Route::get('/csv/export',[CsvController::class,'export'])->name('csv.export');
+// // Rutas para insertar usuarios desde CSV
+// Route::get('/csv',[CsvController::class,'index'])->name('csv.index');
+// Route::post('/csv/import',[CsvController::class,'import'])->name('csv.import');
+// Route::get('/csv/export',[CsvController::class,'export'])->name('csv.export');
 
-// Rutas para que un usuario pueda reestablecer contraseña
-Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
-Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
+// // Rutas para que un usuario pueda reestablecer contraseña
+// Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
+// Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
 
 // Rutas de gestión de proyectos
+Route::get('/proyectos/nuevo', [ProjectController::class, 'create'])->name('projects.create');
+
 Route::get('/proyectos/{dep}', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/proyectos/grado/{grado}', [ProjectController::class, 'searchByGrade'])->name('projects.grade');
 Route::get('/proyectos/titulo/{titulo}', [ProjectController::class, 'searchByTitle'])->name('projects.title');
 Route::get('/proyectos/clave/{clave}', [ProjectController::class, 'searchByKeyWord'])->name('projects.keyword');
+
 
