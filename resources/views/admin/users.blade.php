@@ -1,14 +1,6 @@
 @extends('master')
 
-@section('title')
-    @if($user->name == 'comercio')
-        COMERCIO Y MARKETING
-    @elseif($user->name == 'imagen')
-        IMAGEN Y SONIDO
-    @elseif($user->name == 'informatica')
-        INFORMÁTICA Y COMUNICACIONES
-    @endif
-@endsection
+@section('title', 'ADMINISTRADOR')
 
 @section('main')
 <main class="main_user">
@@ -123,3 +115,16 @@
     </div>
 </main>
 @endsection
+
+{{-- <select>
+    <optgroup label='Desarrollo web'>
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JS</option>
+    </optgroup>
+    <optgroup label='Programación'>
+        <option>C</option>
+        <option>Rust</option>
+        <option>Python</option>
+    </optgroup>
+</select> --}}

@@ -82,7 +82,7 @@ header>h1 {
 }
 
 .main_user {
-    margin: 10%;
+    margin: 5% 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;

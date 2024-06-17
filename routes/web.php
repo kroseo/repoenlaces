@@ -39,6 +39,10 @@ Route::post('/user',[LoginController::class, 'index']);
 
 // Rutas de gestión de proyectos
 Route::get('/proyectos/nuevo', [ProjectController::class, 'create'])->name('projects.create');
+Route::post('/proyectos/nuevo', [ProjectController::class, 'store'])->name('projects.store');
+Route::get('/proyectos/editar/{user_id}/proyecto{project_id}', [ProjectController::class, 'edit'])->name('projects.edit');
+Route::post('/proyectos/modificar/{user_id}/proyecto{project_id}', [ProjectController::class, 'update'])->name('projects.update');
+Route::get('/proyectos/detalle/{user_id}/proyecto{project_id}', [ProjectController::class, 'show'])->name('projects.show');
 
 Route::get('/proyectos/{dep}', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/proyectos/grado/{grado}', [ProjectController::class, 'searchByGrade'])->name('projects.grade');

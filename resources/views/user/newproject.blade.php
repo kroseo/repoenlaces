@@ -12,9 +12,15 @@
 
 @section('main')
 <main class="main_user">
+    <div class="w-full">
+        <button type="button" onclick="window.history.go(-1); return false;" class="flex flex-row focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-blue-900">
+            <img src="{{ asset('img/flecha_atras.png') }}" alt="flecha_atras" class="w-3 me-2 mt-1">
+            Atrás
+        </button>
+    </div>
     <h1 class="text-4xl font-bold text-yellow-400">NUEVO PROYECTO</h1>
     <div class="w-full">
-        <form method="GET" action="{{ route('projects.index', $user->id) }}" class="items-start mt-5">
+        <form method="POST" action="{{ route('projects.store') }}" class="items-start mt-5">
         @csrf
             <table class="w-full">
                 <tr class="w-full">
@@ -31,7 +37,26 @@
                         <label for="grade" class="text-xl">Ciclo formativo:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="grade" id="grade" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <select name="grade" id="grade" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                            @if($user->name == 'comercio')
+                                <option value="CFGM Actividades Comerciales" selected>CFGM Actividades Comerciales</option>
+                                <option value="CFGS Comercio Internacional">CFGS Comercio Internacional</option>
+                                <option value="CFGS Gestión de Ventas y Espacios Comerciales">CFGS Gestión Ventas y Esp. Comerciales</option>
+                                <option value="CFGS Transporte y Logística">CFGS Transporte y Logística</option>
+                                <option value="CFGS Marketing y Publicidad">CFGS Marketing y Publicidad</option>
+                            @elseif($user->name == 'imagen')
+                                <option value="CFGM Video Disc-Jockey y Sonido" selected>CFGM Video Disc-Jockey y Sonido</option>
+                                <option value="CFGS Animaciones 3D, Juegos y Entornos Interactivos">CFGS Animaciones 3D, Juegos y Ent. Interactivos</option>
+                                <option value="CFGS Iluminación, Captación y Tratamiento de la Imagen">CFGS Iluminación, Captación y Trat. Imagen</option>
+                                <option value="CFGS Producción de Audiovisuales y Espectáculos">CFGS Producción de Audiovisuales y Espectáculos</option>
+                                <option value="CFGS Realización de Proyectos de Audiovisuales y Espectáculos">CFGS Realización Proy. Audiovisuales y Espectáculos</option>
+                            @elseif($user->name == 'informatica')
+                                <option value="CFGM Sistema Microinfomáticos y Redes" selected>CFGM Sistema Microinfomáticos y Redes</option>
+                                <option value="CFGS Administración de Sistemas Informáticos en Red">CFGS Administración de Sistemas Informáticos en Red</option>
+                                <option value="CFGS Desarrollo de Aplicaciones Multiplataforma">CFGS Desarrollo de Aplicaciones Multiplataforma</option>
+                                <option value="CFGS Desarrollo de Aplicaciones Web">CFGS Desarrollo de Aplicaciones Web</option>
+                            @endif
+                        </select>
                     </td>
                 </tr>
                 <tr class="h-1"><td></td><td></td></tr>
@@ -49,7 +74,7 @@
                         <label for="email" class="text-xl">Correo electrónico del autor:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="email" id="email" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <input type="email" name="email" id="email" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
                     </td>
                 </tr>
                 <tr class="h-1"><td></td><td></td></tr>
@@ -67,7 +92,7 @@
                         <label for="resume" class="text-xl">Resumen:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="resume" id="resume" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <input type="text" name="resume" id="resume" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" placeholder="Opcional">
                     </td>
                 </tr>
                 <tr class="h-1"><td></td><td></td></tr>
@@ -85,7 +110,7 @@
                         <label for="key2" class="text-xl">Palabra clave 2:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="key2" id="key2" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <input type="text" name="key2" id="key2" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" placeholder="Opcional">
                     </td>
                 </tr>
                 <tr class="h-1"><td></td><td></td></tr>
@@ -94,7 +119,7 @@
                         <label for="key3" class="text-xl">Palabra clave 3:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="key3" id="key3" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <input type="text" name="key3" id="key3" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" placeholder="Opcional">
                     </td>
                 </tr>
                 <tr class="h-1"><td></td><td></td></tr>
@@ -103,7 +128,7 @@
                         <label for="theme" class="text-xl">Área temática:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="theme" id="theme" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <input type="text" name="theme" id="theme" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" placeholder="Opcional">
                     </td>
                 </tr>
                 <tr class="h-1"><td></td><td></td></tr>
@@ -121,12 +146,14 @@
                         <label for="comments" class="text-xl">Comentarios del profesor:</label>
                     </td>
                     <td class="w-96">
-                        <input type="text" name="comments" id="comments" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        <input type="text" name="comments" id="comments" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" placeholder="Opcional">
                     </td>
                 </tr>
-
-                <input type="hidden" name="id" value="{{ $user->id }}"/>
             </table>
+            <input type="hidden" name="id" value="{{ $user->id }}"/>
+            <div class="mt-5 flex justify-center">
+                <input type="submit" value="Guardar" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 text-white">
+            </div>
         </form>
     </div>
 
