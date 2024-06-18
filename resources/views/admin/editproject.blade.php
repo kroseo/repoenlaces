@@ -1,14 +1,6 @@
 @extends('master')
 
-@section('title')
-    @if($user->name == 'comercio')
-        COMERCIO Y MARKETING
-    @elseif($user->name == 'imagen')
-        IMAGEN Y SONIDO
-    @elseif($user->name == 'informatica')
-        INFORMÁTICA Y COMUNICACIONES
-    @endif
-@endsection
+@section('title', 'ADMINISTRADOR')
 
 @section('main')
 <main class="main_user">
@@ -20,7 +12,7 @@
     </div>
     <h1 class="text-4xl font-bold text-yellow-400">EDITAR PROYECTO</h1>
     <div class="w-full">
-        <form method="POST" action="{{ route('projects.update', [$user->id, $project->id]) }}" class="items-start mt-5">
+        <form method="POST"action="{{ route('admin.update', [$user->id, $project->id]) }}" class="items-start mt-5" >
         @csrf
             <table class="w-full">
                 <tr class="w-full">
@@ -34,11 +26,36 @@
                 <tr class="h-1"><td></td><td></td></tr>
                 <tr class="w-full">
                     <td class="bg-yellow-400 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 dark:focus:ring-yellow-900 appearance-none text-white">
+                        <label for="department" class="text-xl">Familia profesional:</label>
+                    </td>
+                    <td class="w-96">
+                        <select name="department" id="department" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                            <option value="comercio"
+                                @if($project->departamento == "comercio")
+                                    selected
+                                @endif
+                            >Marketing y Comercio</option>
+                            <option value="imagen"
+                                @if($project->departamento == "imagen")
+                                    selected
+                                @endif
+                            >Imagen y Sonido</option>
+                            <option value="informatica"
+                                @if($project->departamento == "informatica")
+                                    selected
+                                @endif
+                            >Informática y Comunicaciones</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="h-1"><td></td><td></td></tr>
+                <tr class="w-full">
+                    <td class="bg-yellow-400 focus:ring-yellow-300 font-medium rounded-lg text-sm px-2 dark:focus:ring-yellow-900 appearance-none text-white">
                         <label for="grade" class="text-xl">Ciclo formativo:</label>
                     </td>
                     <td class="w-96">
                         <select name="grade" id="grade" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
-                            @if($user->name == 'comercio')
+                            <optgroup label='Marketing y comercio'>
                                 <option value="CFGM Actividades Comerciales"
                                     @if($project->ciclo == "CFGM Actividades Comerciales")
                                         selected
@@ -64,7 +81,8 @@
                                         selected
                                     @endif
                                 >CFGS Marketing y Publicidad</option>
-                            @elseif($user->name == 'imagen')
+                            </optgroup>
+                            <optgroup label='Imagen y sonido'>
                                 <option value="CFGM Video Disc-Jockey y Sonido"
                                     @if($project->ciclo == "CFGM Video Disc-Jockey y Sonido")
                                         selected
@@ -90,7 +108,8 @@
                                         selected
                                     @endif
                                 >CFGS Realización Proy. Audiovisuales y Espectáculos</option>
-                            @elseif($user->name == 'informatica')
+                            </optgroup>
+                            <optgroup label='Informática y comunicaciones'>
                                 <option value="CFGM Sistema Microinfomáticos y Redes"
                                     @if($project->ciclo == "CFGM Sistema Microinfomáticos y Redes")
                                         selected
@@ -111,7 +130,7 @@
                                         selected
                                     @endif
                                 >CFGS Desarrollo de Aplicaciones Web</option>
-                            @endif
+                            </optgroup>
                         </select>
                     </td>
                 </tr>
@@ -235,6 +254,11 @@
             <div class="mt-5 flex justify-center">
                 <input type="submit" value="Modificar" class="bg-yellow-500 hover:bg-yellow-900 focus:ring-yellow-500 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 text-white">
             </div>
+        </form>
+        <form action="{{ route('admin.destroy', [$user->id, $project->id]) }}" method="POST">
+        @csrf
+        @method('delete')
+            <input type="submit" value="Eliminar" class="bg-red-600 hover:bg-red-900 focus:ring-red-600 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-red-900 appearance-none border-0 text-white">
         </form>
     </div>
 

@@ -6,7 +6,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,41 +14,44 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $user = User::findOrFail($request->id);
-        $projects = Project::where('departamento','=',$user->name)
-            ->orderBy('curso', 'desc')->get();
-        return view('user.index', compact('user', 'projects'));
+        return view('admin.projects', compact('user'));
+    }
+
+    public function allProjects(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        $projects = Project::orderBy('departamento', 'asc')
+            ->orderBy('curso','desc')->get();
+        return view('admin.projects', compact('user', 'projects'));
     }
 
     public function searchByGrade(Request $request) {
         $user = User::findOrFail($request->id);
         //dd($request->ciclo);
-        $projects = Project::where('departamento','=',$user->name)
-            ->where('ciclo','=',$request->ciclo)
+        $projects = Project::where('ciclo','=',$request->ciclo)
             ->orderBy('curso', 'desc')->get();
-        return view('user.index', compact('user', 'projects'));
+        return view('admin.projects', compact('user', 'projects'));
     }
 
     public function searchByTitle(Request $request) {
         $user = User::findOrFail($request->id);
         //dd($request->title);
-        $projects = Project::where('departamento','=',$user->name)
-            ->where('titulo','LIKE','%'.$request->title.'%')
+        $projects = Project::where('titulo','LIKE','%'.$request->title.'%')
             ->orderBy('curso', 'desc')->get();
-        return view('user.index', compact('user', 'projects'));
+        return view('admin.projects', compact('user', 'projects'));
     }
 
     public function searchByKeyword(Request $request) {
         $user = User::findOrFail($request->id);
         //dd($request->keyword);
         //dd($user->name);
-        $projects = Project::where('departamento','=',$user->name)
-            ->where(function ($query)  use ($request) {
+        $projects = Project::where(function ($query)  use ($request) {
                 $query->where('clave1','LIKE','%'.$request->keyword.'%')
                     ->orWhere('clave2','LIKE','%'.$request->keyword.'%')
                     ->orWhere('clave3','LIKE','%'.$request->keyword.'%');
             })
             ->orderBy('curso', 'desc')->get();
-        return view('user.index', compact('user', 'projects'));
+        return view('admin.projects', compact('user', 'projects'));
     }
 
     /**
@@ -57,8 +60,7 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         $user = User::findOrFail($request->id);
-        $projects = Project::where('departamento','=',$user->name)->get();
-        return view('user.newproject', compact('user', 'projects'));
+        return view('admin.newproject', compact('user'));
     }
 
     /**
@@ -69,7 +71,7 @@ class ProjectController extends Controller
         $user = User::findOrFail($request->id);
         Project::create([
             'titulo' => $request->input('title'),
-            'departamento' => $user->name,
+            'departamento' => $request->input('department'),
             'ciclo' => $request->input('grade'),
             'autor' => $request->input('author'),
             'email' => $request->input('email'),
@@ -83,9 +85,10 @@ class ProjectController extends Controller
             'comentarios' => $request->input('comments')
         ]);
 
-        $projects = Project::where('departamento','=',$user->name)->get();
+        $projects = Project::orderBy('departamento', 'asc')
+            ->orderBy('curso','desc')->get();
 
-        return view('user.index', compact('user', 'projects'));
+        return view('admin.projects', compact('user', 'projects'));
     }
 
     /**
@@ -96,7 +99,7 @@ class ProjectController extends Controller
         $user = User::findOrFail($user_id);
         $project = Project::find($project_id);
 
-        return view('user.projectdetail', compact('user', 'project'));
+        return view('admin.projectdetail', compact('user', 'project'));
     }
 
     /**
@@ -106,7 +109,7 @@ class ProjectController extends Controller
     {
         $user = User::findOrFail($user_id);
         $project = Project::find($project_id);
-        return view('user.editproject', compact('user', 'project'));
+        return view('admin.editproject', compact('user', 'project'));
     }
 
     /**
@@ -118,7 +121,7 @@ class ProjectController extends Controller
         $project = Project::find($project_id);
         $project->update([
             'titulo' => $request->input('title'),
-            'departamento' => $user->name,
+            'departamento' => $request->input('department'),
             'ciclo' => $request->input('grade'),
             'autor' => $request->input('author'),
             'email' => $request->input('email'),
@@ -132,16 +135,24 @@ class ProjectController extends Controller
             'comentarios' => $request->input('comments')
         ]);
 
-        $projects = Project::where('departamento','=',$user->name)->get();
+        $projects = Project::orderBy('departamento', 'asc')
+            ->orderBy('curso','desc')->get();
 
-        return view('user.index', compact('user', 'projects'));
+        return view('admin.projects', compact('user', 'projects'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $user_id, string $project_id)
     {
-        //
+        $user = User::findOrFail($user_id);
+        $project = Project::find($project_id);
+        $project->delete();
+
+        $projects = Project::orderBy('departamento', 'asc')
+            ->orderBy('curso','desc')->get();
+
+        return view('admin.projects', compact('user', 'projects'));
     }
 }
