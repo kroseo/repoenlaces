@@ -42,23 +42,20 @@ Route::get('/admin/proyectos/titulo/{titulo}', [AdminController::class, 'searchB
 Route::get('/admin/proyectos/clave/{clave}', [AdminController::class, 'searchByKeyWord'])->name('admin.keyword');
 
 // Rutas para registro de usuarios
-Route::get('/admin/usuarios/nuevo', [RegisterController::class, 'create'])->name('user.newuser');
-Route::post('/admin/usuarios/nuevo', [RegisterController::class, 'store']);
-Route::get('/admin/usuarios/editar/{user_id}', [RegisterController::class, 'edit'])->name('user.edit');
-Route::post('/admin/usuarios/modificar/{user_id}', [RegisterController::class, 'update'])->name('user.update');
+Route::post('/admin/usuarios/nuevo', [RegisterController::class, 'store'])->name('user.store');
+Route::get('/admin/usuarios/editar/{user_id}/usuario{username_id}', [RegisterController::class, 'edit'])->name('user.edit');
+Route::post('/admin/usuarios/modificar/{user_id}/usuario{username_id}', [RegisterController::class, 'update'])->name('user.update');
 Route::get('/admin/usuarios/detalle/{user_id}', [RegisterController::class, 'show'])->name('user.show');
-Route::delete('/admin/usuarios/delete/{user_id}', [RegisterController::class, 'destroy'])->name('user.destroy');
+Route::delete('/admin/usuarios/delete/{user_id}/usuario{username_id}', [RegisterController::class, 'destroy'])->name('user.destroy');
 
 Route::get('/admin/usuarios/', [RegisterController::class, 'index'])->name('user.index');
 Route::get('/admin/usuarios/{dep}', [RegisterController::class, 'allUsers'])->name('user.users');
-Route::get('/admin/usuarios/grado/{grado}', [RegisterController::class, 'searchByDepartment'])->name('user.department');
-Route::get('/admin/usuarios/titulo/{titulo}', [RegisterController::class, 'searchByTitle'])->name('user.title');
-Route::get('/admin/usuarios/clave/{clave}', [RegisterController::class, 'searchByKeyWord'])->name('user.keyword');
+Route::get('/admin/usuarios/departamento/{dep}', [RegisterController::class, 'searchByDepartment'])->name('user.department');
+Route::get('/admin/usuarios/nombre/{nombre}', [RegisterController::class, 'searchByName'])->name('user.username');
 
 // Rutas para insertar usuarios desde CSV
-Route::get('/admin/csv',[CsvController::class,'index'])->name('csv.index');
-Route::post('/admin/csv/import',[CsvController::class,'import'])->name('csv.import');
-Route::get('/admin/csv/export',[CsvController::class,'export'])->name('csv.export');
+Route::post('/admin/csv/import/{user}',[RegisterController::class,'importCSV'])->name('csv.import');
+Route::get('/admin/csv/export/{user}',[RegisterController::class,'export'])->name('csv.export');
 
 // Rutas de usuario
 Route::get('/proyectos/nuevo', [ProjectController::class, 'create'])->name('projects.create');
