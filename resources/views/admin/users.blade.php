@@ -89,12 +89,40 @@
                         <td class="px-6 py-4">
                             <a href="{{ route('user.edit', [$user->id, $username->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
                         </td>
+                        <script>
+                            function eliminar(){
+                                var usuario = document.getElementById('deleteUser').name;
+                                alert('¡Usuario/a '+ usuario +' eliminado/a!');
+                                // Swal = require('sweetalert2');
+                                // Swal.fire({
+                                //     title: "¿Estás segur@ de eliminar este/a usuari@?",
+                                //     text: "¡No podrás revertir los cambios!",
+                                //     icon: "warning",
+                                //     showCancelButton: true,
+                                //     confirmButtonColor: "#3085d6",
+                                //     cancelButtonColor: "#d33",
+                                //     confirmButtonText: "Sí, eliminar usuari@",
+                                //     cancelButtonText: "Cancelar"
+                                // }).then((result) => {
+                                //     if (result.isConfirmed) {
+                                //         Swal.fire({
+                                //             title: "¡Usuari@ borrad@!",
+                                //             text: "El/la usuari@ ha sido eliminad@.",
+                                //             icon: "success"
+                                //         });
+                                //         this.submit()
+                                //     }
+                                // })
+                            }
+                        </script>
                         <td class="px-6 py-4">
-                            <form action="{{ route('user.destroy', [$user->id, $username->id]) }}" method="POST">
+                            <form action="{{ route('user.destroy', [$user->id, $username->id]) }}" method="POST" id="form_deleteUser">
                             @csrf
                             @method('delete')
                                 @if($username->name != 'admin')
-                                    <input type="submit" value="Eliminar" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                    <button type="submit" onclick="eliminar();" id="deleteUser" name="<?php echo substr($username->email, 0, -18);?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                        Eliminar
+                                    </button>
                                 @endif
                             </form>
                         </td>
@@ -105,7 +133,8 @@
         </table>
     </div>
 
-    <h1 class="text-blue-500 font-medium rounded-lg text-3xl px-5 py-2 mt-10">Insertar usuarios</h1>
+    <div class="bg-gray-300 h-0.5 w-full mt-10"></div>
+    <h1 class="text-blue-600 font-medium rounded-lg text-3xl px-5 py-2 mt-10 mb-10">Insertar usuarios</h1>
 
     <div class="options">
         <form method="POST" action="{{ route('user.store', $user->id) }}">
@@ -133,7 +162,7 @@
                         </select>
                     </td>
                     <td class="w-5"></td>
-                    <td class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">
+                    <td class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-blue-500 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">
                         <input type="hidden" name="id" value="{{ $user->id }}"/>
                         <input type="submit" value="Agregar nuevo usuario" class="text-sm"/>
                     </td>
@@ -155,7 +184,7 @@
                         <input type="file" name="document_csv" id="document_csv" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
                     </td>
                     <td class="w-5"></td>
-                    <td class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">
+                    <td class="focus:outline-none text-white bg-blue-500 hover:bg-blue-700 focus:ring-blue-500 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:focus:ring-yellow-900">
                         <input type="hidden" name="id" value="{{ $user->id }}"/>
                         <input type="submit" value="Añadir lista de usuarios" class="text-sm"/>
                     </td>

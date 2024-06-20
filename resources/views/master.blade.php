@@ -7,6 +7,8 @@
     <title>Repositorio - Los Enlaces</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 </head>
 <body>
     <header>
@@ -31,5 +33,6 @@
         </button>
     </header>
     @yield('main')
+    <script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>

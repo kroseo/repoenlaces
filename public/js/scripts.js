@@ -1,0 +1,3 @@
+function eliminarUsuario(){
+    alert('hola');
+}

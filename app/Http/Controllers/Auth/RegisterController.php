@@ -52,14 +52,12 @@ class RegisterController extends Controller
             'document_csv'=>'required|mimes:csv|max:2048'
         ]);
 
-        try {
-            $file = $request->file('document_csv');
-            Excel::import(new UserImport, $file);
-            return view('user.users', $user->id);
-        }
-        catch(\Exception $e) {
-            dd('Error');
-        }
+        $file = $request->file('document_csv');
+        Excel::import(new UserImport, $file);
+
+        $users = User::orderBy('name','asc')
+            ->orderBy('email','asc')->get();
+        return view('admin.users', compact('user', 'users'));
     }
 
     /**
