@@ -18,8 +18,15 @@ class LoginController extends Controller
             if(password_verify($request->password, $user->password)) {
                 if($user->name == 'admin'){
                     return view('admin.index', compact('user'));
+                } else {
+                    //dd($request->password);
+                    if(password_verify('losenlaces', $user->password)){
+                        return redirect()->route('password.index');
+                    } else {
+                        //dd('no ha comprobado bien password_verify');
+                        return view('user.index', compact('user'));
+                    }
                 }
-                return view('user.index', compact('user'));
             }
             else {
                 //dd('Contraseña incorrecta');

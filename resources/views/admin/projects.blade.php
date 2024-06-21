@@ -116,8 +116,7 @@
                             <a href="{{ route('admin.edit', [$user->id, $project->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
                         </td>
                         <script>
-                            function eliminar(){
-                                var proyecto = document.getElementById('deleteProject').name;
+                            function eliminar(proyecto){
                                 alert('¡Proyecto '+ proyecto +' eliminado!');
                             }
                         </script>
@@ -125,34 +124,9 @@
                             <form action="{{ route('admin.destroy', [$user->id, $project->id]) }}" method="POST" id="form_deleteProject">
                             @csrf
                             @method('delete')
-                                <input type="submit" onclick="eliminar();" id="deleteProject" value="Eliminar" name="<?php echo $project->titulo;?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                @php $proyecto = $project->titulo; @endphp
+                                <input type="submit" onclick='eliminar("<?php echo $proyecto ?>");' id="deleteProject" value="Eliminar" class="font-medium text-red-600 dark:text-red-500 hover:underline">
                             </form>
-                                    {{--NO FUNCIONA ESTE SCRIPT--}}
-                            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-                                // $('#form_deleteProject').on('submit', function(e){
-                                //     e.preventDefault();
-
-                                //     Swal.fire({
-                                //         title: "¿Estás segur@ de eliminar este proyecto?",
-                                //         text: "¡No podrás revertir los cambios!",
-                                //         icon: "warning",
-                                //         showCancelButton: true,
-                                //         confirmButtonColor: "#3085d6",
-                                //         cancelButtonColor: "#d33",
-                                //         confirmButtonText: "Sí, eliminar proyecto",
-                                //         cancelButtonText: "Cancelar"
-                                //     }).then((result) => {
-                                //         if (result.isConfirmed) {
-                                //             Swal.fire({
-                                //                 title: "¡Proyecto borrado!",
-                                //                 text: "El proyecto ha sido eliminado.",
-                                //                 icon: "success"
-                                //             });
-                                //             this.submit()
-                                //         }
-                                //     })
-                                // })
-                            </script>
                         </td>
                     </tr>
                 @endforeach

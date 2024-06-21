@@ -90,37 +90,17 @@
                             <a href="{{ route('user.edit', [$user->id, $username->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
                         </td>
                         <script>
-                            function eliminar(){
-                                var usuario = document.getElementById('deleteUser').name;
+                            function eliminar(usuario){
                                 alert('¡Usuario/a '+ usuario +' eliminado/a!');
-                                // Swal = require('sweetalert2');
-                                // Swal.fire({
-                                //     title: "¿Estás segur@ de eliminar este/a usuari@?",
-                                //     text: "¡No podrás revertir los cambios!",
-                                //     icon: "warning",
-                                //     showCancelButton: true,
-                                //     confirmButtonColor: "#3085d6",
-                                //     cancelButtonColor: "#d33",
-                                //     confirmButtonText: "Sí, eliminar usuari@",
-                                //     cancelButtonText: "Cancelar"
-                                // }).then((result) => {
-                                //     if (result.isConfirmed) {
-                                //         Swal.fire({
-                                //             title: "¡Usuari@ borrad@!",
-                                //             text: "El/la usuari@ ha sido eliminad@.",
-                                //             icon: "success"
-                                //         });
-                                //         this.submit()
-                                //     }
-                                // })
                             }
                         </script>
                         <td class="px-6 py-4">
                             <form action="{{ route('user.destroy', [$user->id, $username->id]) }}" method="POST" id="form_deleteUser">
                             @csrf
                             @method('delete')
+                                @php $usuario = substr($username->email, 0, -18); @endphp
                                 @if($username->name != 'admin')
-                                    <button type="submit" onclick="eliminar();" id="deleteUser" name="<?php echo substr($username->email, 0, -18);?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                    <button type="submit" onclick='eliminar("<?php echo $usuario ?>");' id="deleteUser"  class="font-medium text-red-600 dark:text-red-500 hover:underline">
                                         Eliminar
                                     </button>
                                 @endif

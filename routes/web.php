@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CsvController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PassController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //Rutas tras el login de usuario
-Route::post('/user',[LoginController::class, 'index']);
+Route::post('/user',[LoginController::class, 'index'])->name('user.main');
 
 //Rutas de administrador
 Route::get('/admin/proyectos/nuevo', [AdminController::class, 'create'])->name('admin.create');
@@ -69,10 +70,5 @@ Route::get('/proyectos/grado/{grado}', [ProjectController::class, 'searchByGrade
 Route::get('/proyectos/titulo/{titulo}', [ProjectController::class, 'searchByTitle'])->name('projects.title');
 Route::get('/proyectos/clave/{clave}', [ProjectController::class, 'searchByKeyWord'])->name('projects.keyword');
 
-
-
-// // Rutas para que un usuario pueda reestablecer contraseña
-// Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store']);
-// Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
-
-
+Route::get('/password/mailTo', [PassController::class, 'index'])->name('password.index');
+Route::get('/password/mailSend', [PassController::class, 'send'])->name('password.send');

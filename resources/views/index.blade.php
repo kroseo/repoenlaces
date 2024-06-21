@@ -10,7 +10,7 @@
 <body>
     <main>
         <div class="logo_container">
-            <form class="login_form" action="{{ url('/user') }}" method="POST">
+            <form class="login_form" action="{{ route('user.main') }}" method="POST">
             @csrf
                 <table>
                     <tr>
@@ -36,7 +36,7 @@
                         <td class="center" colspan="2"><input type="submit" value="Entrar" class="submit_button"></td>
                     </tr>
                     <tr>
-                        <td class="center" colspan="2"><a href="" class="forgotten_password">¿Olvidó su contraseña?</a></td>
+                        <td class="center" colspan="2"><a href="{{ route('password.index') }}" class="forgotten_password">¿Olvidó su contraseña?</a></td>
                     </tr>
                 </table>
             </form>
