@@ -72,3 +72,5 @@ Route::get('/proyectos/clave/{clave}', [ProjectController::class, 'searchByKeyWo
 
 Route::get('/password/mailTo', [PassController::class, 'index'])->name('password.index');
 Route::get('/password/mailSend', [PassController::class, 'send'])->name('password.send');
+Route::get('/password/changePassword', [PassController::class, 'edit'])->name('password.edit');
+Route::post('/password/changePassword', [PassController::class, 'update'])->name('password.update');

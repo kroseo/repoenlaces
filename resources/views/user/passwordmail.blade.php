@@ -25,7 +25,7 @@
                 </td>
             </tr>
             <tr class="w-full">
-                <td class="col-span-5 align-center">
+                <td class="align-center" colspan="5">
                     <div class="form_table_error">
                         @if (session('message'))
                             {{ session('message') }}
