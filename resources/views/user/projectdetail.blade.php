@@ -140,7 +140,9 @@
                     Enlace a directorio en Drive:
                 </td>
                 <td class="w-96">
-                    <div class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full"><a href="{{ $project->enlace }}">{{ $project->enlace }}</a></div>
+                    <div class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 ms-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full">
+                        <a href="{{ $project->enlace }}" target="_blank">{{ $project->enlace }}</a>
+                    </div>
                 </td>
             </tr>
             <tr class="h-1"><td></td><td></td></tr>
