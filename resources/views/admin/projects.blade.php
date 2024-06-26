@@ -134,6 +134,11 @@
         @endif
         </table>
     </div>
+    <div class="mt-5 text-red-500">
+        @if(isset($notfound))
+            {{ $notfound }}
+        @endif
+    </div>
     <div class="options mb-10">
         <form method="GET" action="{{ route('admin.create', $user->id) }}">
         @csrf

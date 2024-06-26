@@ -32,6 +32,11 @@
                 </td>
                 <td>
                     <select name="department" id="department" class="bg-yellow-300 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2 dark:focus:ring-yellow-900 appearance-none border-0 w-full" required>
+                        @if($username->name == 'admin')
+                            <option value="admin" selected>
+                                    Administrador
+                            </option>
+                        @endif
                         <option value="comercio"
                             @if($username->name == 'comercio')
                                 selected

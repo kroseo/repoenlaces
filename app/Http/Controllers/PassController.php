@@ -21,7 +21,7 @@ class PassController extends Controller
                     Hola '.$request->email.',
                     Siga el siguiente enlace para cambiar su contraseña:
                     http://localhost/repoenlaces/public/password/changePassword?email='.$request->email,
-                'De: rubenmanerobuey@gmail.com')) {
+                'De: repositorio.losenlaces@gmail.com')) {
             return redirect()->route('password.index')
                 ->with('message', 'Se ha enviado el correo electrónico a la dirección indicada: '.$request->email.'@cpilosenlaces.com');
         } else {

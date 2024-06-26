@@ -41,7 +41,14 @@ class RegisterController extends Controller
         //dd($request->title);
         $users = User::where('email','LIKE','%'.$request->email.'%@cpilosenlaces.com')
             ->orderBy('email', 'asc')->get();
-        return view('admin.users', compact('user', 'users'));
+        if(isset($users[0])) {
+            //dd($users);
+            return view('admin.users', compact('user', 'users'));
+        } else {
+            //dd('else');
+            $notfound = "No se ha encontrado ningún usuario con el nombre indicado.";
+            return view('admin.users', compact('user', 'notfound'));
+        }
     }
 
     public function importCSV(Request $request)

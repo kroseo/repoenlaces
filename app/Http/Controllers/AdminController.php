@@ -40,7 +40,14 @@ class AdminController extends Controller
         //dd($request->title);
         $projects = Project::where('titulo','LIKE','%'.$request->title.'%')
             ->orderBy('curso', 'desc')->get();
-        return view('admin.projects', compact('user', 'projects'));
+        if(isset($projects[0])) {
+            //dd($projects);
+            return view('admin.projects', compact('user', 'projects'));
+        } else {
+            //dd('else');
+            $notfound = "No se ha encontrado ningún proyecto con el criterio de búsqueda seleccionado.";
+            return view('admin.projects', compact('user', 'notfound'));
+        }
     }
 
     public function searchByKeyword(Request $request) {
@@ -53,7 +60,14 @@ class AdminController extends Controller
                     ->orWhere('clave3','LIKE','%'.$request->keyword.'%');
             })
             ->orderBy('curso', 'desc')->get();
-        return view('admin.projects', compact('user', 'projects'));
+        if(isset($projects[0])) {
+            //dd($projects);
+            return view('admin.projects', compact('user', 'projects'));
+        } else {
+            //dd('else');
+            $notfound = "No se ha encontrado ningún proyecto con el criterio de búsqueda seleccionado.";
+            return view('admin.projects', compact('user', 'notfound'));
+        }
     }
 
     /**
