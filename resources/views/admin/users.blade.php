@@ -91,7 +91,7 @@
                         </td>
                         <script>
                             function eliminar(usuario){
-
+                                alert('¡Usuario/a '+ usuario +' eliminado/a!');
                             }
                         </script>
                         <td class="px-6 py-4">
@@ -100,7 +100,7 @@
                             @method('delete')
                                 @php $usuario = substr($username->email, 0, -18); @endphp
                                 @if($username->name != 'admin')
-                                    <button type="submit" onclick='eliminar("<?php echo $usuario ?>");' id="{{ $usuario }}"  class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                    <button type="submit" onclick='eliminar("<?php echo $usuario ?>");' id="deleteUser"  class="font-medium text-red-600 dark:text-red-500 hover:underline">
                                         Eliminar
                                     </button>
                                 @endif
@@ -111,12 +111,6 @@
             </tbody>
         @endif
         </table>
-    </div>
-
-    <div class="mt-5 text-red-500">
-        @if(isset($notfound))
-            {{ $notfound }}
-        @endif
     </div>
 
     <div class="bg-gray-300 h-0.5 w-full mt-10"></div>
